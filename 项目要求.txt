@@ -1,0 +1,38 @@
+目标goal:
+    为行商问题Traveling Salesman Problem (TSP)设计进化算法，计算不同实例
+
+工作流workflow：
+    1.设计一个标准进化算法
+    2.实现（从公开学术资料找）至少一个进阶技术
+        e.g.
+            parameter self-adaptation, mproved mutation/crossover, diversity preservation,
+    3.测试通过 Western Sahara (29 cities)实例
+    4.测试通过 ruguay (734 cities)实例
+    5.测试通过 Canada (4663 cities)实例
+
+阶段milestones：
+    1.项目企划 - due 10.09
+        1.算法设计
+        2.选用的进阶技术
+        3.运行时优化runtime optimization
+        4.团队组织、任务分配
+    2.项目样例 - due 10.27
+        6mins解说 + 1min问答
+    3.项目成品 - due 11.10
+        项目报告 + 源码
+            源码中包含一个readme.txt说明文档
+            整个程序应该完全原创
+
+评估marking：
+    评估主要基于效用effectiveness与效率efficiency，反映在各小组比较（竞争）中
+    以及代码风格、可读性、组织，报告用图表
+
+附注notes：
+    实例数据文件
+        文件名：SP_[country]_[#cities]
+        结构：
+            行：x坐标 y坐标
+    适应度评估：
+        fitness = complete tour length(starting and ending at the same city)
+    城市间距离：
+        distance = Euclideandistance of their coordinates
