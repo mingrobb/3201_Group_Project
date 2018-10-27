@@ -9,12 +9,12 @@ cities = Extract_cities.get_cities(file)
 
 class City(object):
     """
-    A city class which is use to store city object, and automatically add to the cities dictionary
+    A city class which is use to store city object
     """
 
     def __init__(self, name, x, y, distances=None):
         """
-        Initialize city object and automatically add the city into the cities dictionary
+        Initialize city object, including the coordinates and the distances to other cities
         :param name: city name
         :param x: x coordinate
         :param y: y coordinate
