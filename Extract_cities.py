@@ -10,7 +10,7 @@ def get_cities(cities_file):
     with open(cities_file, "r") as file:
         for line in file:
             l = line.split(" ")
-            name = l[0]
+            name = int(l[0])
             x = float(l[1])
             y = float(l[2])
             cities[name] = [x, y]

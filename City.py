@@ -12,14 +12,14 @@ class City(object):
     A city class which is use to store city object
     """
 
-    def __init__(self, name, x, y, distances=None):
+    def __init__(self, id, x, y, distances=None):
         """
         Initialize city object, including the coordinates and the distances to other cities
         :param name: city name
         :param x: x coordinate
         :param y: y coordinate
         """
-        self.name = name
+        self.id = id
         self.x = x
         self.y = y
 
@@ -54,7 +54,7 @@ class City(object):
 ######            ######
 ########################
 """
-city = City('1', 20833.3333, 17100.0000)
+city = City(1, 20833.3333, 17100.0000)
 city.cal_distance()
 print(city.distances)
 """
