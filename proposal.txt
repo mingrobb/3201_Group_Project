@@ -1,0 +1,32 @@
+﻿CS3201 Project Proposal
+
+#1.Abstract
+    This project is to build a program to solve Traveling Salesman Problem (TSP) using evolutionary algorithm.
+
+#2.Algorithm design
+    (1)Representation
+        route = a sequence of city IDs    (chromosome)
+            e.g. [3, 5, 4, 8, 7, 1, 6, 2, ...]
+    (2)Evaluation
+        route_length = distance(route) = ∑|cityDist(i,i+1)|
+        fitness could be evaluated in three ways
+            1.favor and adapt the least one route_length
+            2.1 / route_length
+            3.e^(1/route_length)
+    (3)Crossover
+        multi-points cut / uniform cut
+        ensure each cities in route appears just once after crossover
+    (4)Mutation
+        randomly swap two city IDs in route sequence
+    (5)Selection
+        tournament
+
+#3.Advanced technique
+    ...
+
+#4.Runtime optimization
+    multithreads when data is considerable large
+    store city data in dictionary
+    hash table to save data
+
+#5.Organizaion & labour division
