@@ -21,8 +21,9 @@ class Population(object):
 
         for i in range(size):
             new_tour = Tour.Tour(self.file)
-            fitness = float(1/new_tour.length)
-            self.population[i] = [new_tour.tour, fitness]
+            fitness = new_tour.fitness
+            self.population[i] = [new_tour, fitness]
+
 
 
 ########################

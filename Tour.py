@@ -6,7 +6,7 @@ class Tour(object):
     """
     Stores an ordered list of all city id and the length of the tour
     """
-    def __init__(self, file):
+    def __init__(self, file, tour=None):
         """
         An initializer to initialize the tour object
         :param file: A file that contains city information
@@ -15,9 +15,16 @@ class Tour(object):
         self.cities: a dictionary that contains all the city information
         self.length: the length of the tour
         """
+        self.city_objects = []
         self.cities = Extract_cities.get_cities(file)
-        self.tour = sorted(list(self.cities.keys()), key=lambda *args: random.random())
-        self.length = self.cal_len()
+        if tour:
+            self.tour = tour
+            self.length = self.cal_len()
+        else:
+
+            self.tour = sorted(list(self.cities.keys()), key=lambda *args: random.random())
+            self.length = self.cal_len()
+        self.fitness = 1/self.length
 
 
     def cal_len(self):
@@ -32,11 +39,12 @@ class Tour(object):
             #add distance between current city to the next city
             cur_city = City.City(city, self.cities[city][0], self.cities[city][1])
             cur_city.cal_distance()
+            self.city_objects.append(cur_city)
 
             if city != self.tour[-1]:
                 next = self.tour[self.tour.index(city)+1]
                 next_city = City.City(next, self.cities[next][0], self.cities[next][1])
-                next_city.cal_distance()
+                #next_city.cal_distance()
 
                 distance_to_next = cur_city.distances[next_city.id]
                 tour_length += distance_to_next
@@ -52,6 +60,7 @@ class Tour(object):
         return tour_length
 
 
+
 ########################
 ######            ######
 ######    Test    ######
@@ -59,7 +68,11 @@ class Tour(object):
 ########################
 """
 file  = "Cities/TSP_WesternSahara_29.txt"
-tour = Tour(file)
+tour = Tour(file, None)
 print(tour.length)
 print(tour.tour)
+print(len(tour.tour))
+print(len(tour.city_objects))
+for i in tour.city_objects:
+    print(i.id, i.x, i.y)
 """
