@@ -1,9 +1,9 @@
 
-import random
 import Tour
 import Initialization
+import CityMap
 
-def COWGC(parent1, parent2, file):
+def COWGC(parent1, parent2, city_map):
     """
     cut on worst gene crossover (advanced method of crossover)
     • Step1: find the worst gene in the first parent, and the worst gene in the second parent.
@@ -28,9 +28,9 @@ def COWGC(parent1, parent2, file):
 
     #Modified crossover
     if distance1 > distance2:
-        offspring1, offspring2 = modified_crossover_COWGC(parent1, parent2,cut_point1, file)
+        offspring1, offspring2 = modified_crossover_COWGC(parent1, parent2,cut_point1, city_map)
     else:
-        offspring1, offspring2 = modified_crossover_COWGC(parent1, parent2, cut_point2, file)
+        offspring1, offspring2 = modified_crossover_COWGC(parent1, parent2, cut_point2, city_map)
 
     return offspring1, offspring2
 
@@ -66,7 +66,7 @@ def cal_cut_point_COWGC(parent):
     return cut_point, max_distance
 
 
-def modified_crossover_COWGC(parent1, parent2, cut_point, file):
+def modified_crossover_COWGC(parent1, parent2, cut_point, city_map):
     """
     A function to apply modified crossover with given parents and cut point
     :param parent1: a list with tour object
@@ -93,8 +93,8 @@ def modified_crossover_COWGC(parent1, parent2, cut_point, file):
         else:
             continue
 
-    offspring1 = Tour.Tour(file, off1)
-    offspring2 = Tour.Tour(file, off2)
+    offspring1 = Tour.Tour(city_map, off1)
+    offspring2 = Tour.Tour(city_map, off2)
 
     return offspring1, offspring2
 
@@ -106,14 +106,16 @@ def modified_crossover_COWGC(parent1, parent2, cut_point, file):
 ########################
 """
 file  = "Cities/TSP_WesternSahara_29.txt"
-Object = Initialization.Population(4, file)
+c = CityMap.CityMap(file)
+city_map = c.city_map
+Object = Initialization.Population(4, city_map)
 pop = Object.population
 p1 = pop[0][0]
 p2 = pop[1][0]
 print("parents:")
 print(p1.tour, "fitness: ",p1.fitness )
 print(p2.tour, "fitness: ",p2.fitness )
-o1, o2 = COWGC(p1, p2, file)
+o1, o2 = COWGC(p1, p2, city_map)
 print("offsprings:")
 print(o1.tour, "fitness: ",o1.fitness)
 print(o2.tour, "fitness: ", o2.fitness)

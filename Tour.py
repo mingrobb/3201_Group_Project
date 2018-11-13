@@ -1,12 +1,11 @@
-import Extract_cities
 import random
-import City
+import CityMap
 
 class Tour(object):
     """
     Stores an ordered list of all city id and the length of the tour
     """
-    def __init__(self, file, tour=None):
+    def __init__(self, city_map, tour=None):
         """
         An initializer to initialize the tour object
         :param file: A file that contains city information
@@ -15,14 +14,14 @@ class Tour(object):
         self.cities: a dictionary that contains all the city information
         self.length: the length of the tour
         """
+        self.city_map = city_map
+        self.cities = city_map.keys()
         self.city_objects = []
-        self.cities = Extract_cities.get_cities(file)
         if tour:
             self.tour = tour
             self.length = self.cal_len()
         else:
-
-            self.tour = sorted(list(self.cities.keys()), key=lambda *args: random.random())
+            self.tour = sorted(list(self.cities), key=lambda *args: random.random())
             self.length = self.cal_len()
         self.fitness = 1/self.length
 
@@ -30,35 +29,25 @@ class Tour(object):
     def cal_len(self):
         """
         A function to calculate the length of a tour
-        :return: the length of the tour
+        :return: the total length of the tour
         """
-        #cities = Extract_cities.get_cities(self.file)
         tour_length = 0.0
 
         for city in self.tour:
-            #add distance between current city to the next city
-            cur_city = City.City(city, self.cities[city][0], self.cities[city][1])
-            cur_city.cal_distance()
-            self.city_objects.append(cur_city)
-
+            # add distance between current city to the next city
+            self.city_objects.append(self.city_map[city])
             if city != self.tour[-1]:
-                next = self.tour[self.tour.index(city)+1]
-                next_city = City.City(next, self.cities[next][0], self.cities[next][1])
-                #next_city.cal_distance()
-
-                distance_to_next = cur_city.distances[next_city.id]
+                next_city = self.tour[self.tour.index(city)+1]
+                distance_to_next = self.city_map[city].distances[next_city]
                 tour_length += distance_to_next
 
             else:
                 #add the distance between the last city and the first city
-                start = self.tour[0]
-                start_city = City.City(start, self.cities[start][0], self.cities[start][1])
-
-                distance_to_next = cur_city.distances[start_city.id]
+                start_city = self.tour[0]
+                distance_to_next = self.city_map[city].distances[start_city]
                 tour_length += distance_to_next
 
         return tour_length
-
 
 
 ########################
@@ -67,12 +56,15 @@ class Tour(object):
 ######            ######
 ########################
 """
-file  = "Cities/TSP_WesternSahara_29.txt"
-tour = Tour(file, None)
+file = "Cities/TSP_WesternSahara_29.txt"
+c = CityMap.CityMap(file)
+city_map = c.city_map
+tour = Tour(city_map, None)
 print(tour.length)
 print(tour.tour)
 print(len(tour.tour))
 print(len(tour.city_objects))
-for i in tour.city_objects:
-    print(i.id, i.x, i.y)
+for k,v in tour.city_map.items():
+    print(v.id, v.x, v.y)
+    print(v.distances)
 """
