@@ -47,38 +47,37 @@
                         <div id="dashboard">
                             <span class="title" style="font-size: 24px;">Dashboard</span>
 
+                            <span>Now showing the best ___nth___ individual of generation ___N___.</span>
+
                             <br>
                             <span class="title generation">Generation</span>
                             <div class="generation content">
-                                <span>Now showing the best ___nth___ individual of generation ___N___.</span>
-                                <br>
                                 <span>show generation:</span>
                                 <Slider v-model="value1" @on-input="logSth()"></Slider>
                                 <br>
-                                <span>show best nth individual: </span>(supports only best 10 individuals)
-                                <Slider @on-input="logSth()" max="10" show-stops></Slider>
-                            </div>
-
-                            <br>
-                            <span class="title fitness">Fitness</span>
-                            <div class="fitness content">
-                                <p>
-                                    current individual: ___???___<br>
-                                    <br>
-                                    generation average: ___???___<br>
-                                    generation lowest: ___???___<br>
-                                    generation highest: ___???___<br>
+                                <span>fitness</span>
+                                <p style="margin-left: 20px;">
+                                    average: ___???___<br>
+                                    lowest: ___???___<br>
+                                    highest: ___???___<br>
+                                </p>
+                                <br>
+                                <span>distance</span>
+                                <p style="margin-left: 20px;">
+                                    average: ___???___<br>
+                                    shortest: ___???___<br>
+                                    longest: ___???___<br>
                                 </p>
                             </div>
 
                             <br>
-                            <span class="title total_distance">Total distance</span>
-                            <div class="total_distance content">
+                            <span class="title individual">Individual</span>
+                            <div class="individual content">
+                                <span>show best nth individual: </span>(supports only best 10 individuals)
+                                <Slider @on-input="logSth()" max="10" show-stops></Slider>
                                 <p>
-                                    current individual: ___???___<br>
-                                    <br>
-                                    generation lowest: ___???___<br>
-                                    generation highest: ___???___<br>
+                                    fitness: ___???___<br>
+                                    distance: ___???___<br>
                                 </p>
                             </div>
 

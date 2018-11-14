@@ -92,7 +92,7 @@ hr{
     width: 100%;
 }
 
-#dashboard .content>span, #dashboard .content>p{
+#dashboard>span, #dashboard .content>span, #dashboard .content>p{
     font-size: initial;
 }
 
