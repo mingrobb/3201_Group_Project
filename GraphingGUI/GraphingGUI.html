@@ -10,11 +10,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>GraphingGUI</title>
     <!-- using libraries ////////////////////////////////////////////////////////////////////////-->
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/iview@3.1.5/dist/styles/iview.css">
+    <script src="https://unpkg.com/iview@3.1.5/dist/iview.min.js"></script>
     <!-- using stylesheet ///////////////////////////////////////////////////////////////////////-->
     <link rel="stylesheet" href="GraphingGUI.css">
     <!-- import data files //////////////////////////////////////////////////////////////////////-->
@@ -41,32 +43,43 @@
                         <span class="figure title">Generation</span>
                         <div class="figure generation"></div>
                     </td>
-                    <td>
+                    <td style="border-left: 1px solid grey;">
                         <div id="dashboard">
+                            <span class="title" style="font-size: 24px;">Dashboard</span>
+
                             <br>
                             <span class="title generation">Generation</span>
                             <div class="generation content">
-                                Now showing the best ___n___ individual of generation ___N___.
+                                <span>Now showing the best ___nth___ individual of generation ___N___.</span>
                                 <br>
-                                <span>select generation:</span>【A-SLIDER-HERE】
+                                <span>show generation:</span>
+                                <Slider v-model="value1" @on-input="logSth()"></Slider>
                                 <br>
-                                <span>select best n individual:</span>【A-SLIDER-HERE】(supports only best 10 individuals)
+                                <span>show best nth individual: </span>(supports only best 10 individuals)
+                                <Slider @on-input="logSth()" max="10" show-stops></Slider>
                             </div>
 
                             <br>
                             <span class="title fitness">Fitness</span>
                             <div class="fitness content">
-                                average fitness: ___???___<br>
-                                lowest fitness: ___???___<br>
-                                highest fitness: ___???___<br>
+                                <p>
+                                    current individual: ___???___<br>
+                                    <br>
+                                    generation average: ___???___<br>
+                                    generation lowest: ___???___<br>
+                                    generation highest: ___???___<br>
+                                </p>
                             </div>
 
                             <br>
                             <span class="title total_distance">Total distance</span>
-                            <div class="fitness content">
-                                current individual fitness: ___???___<br>
-                                generation lowest fitness: ___???___<br>
-                                generation highest fitness: ___???___<br>
+                            <div class="total_distance content">
+                                <p>
+                                    current individual: ___???___<br>
+                                    <br>
+                                    generation lowest: ___???___<br>
+                                    generation highest: ___???___<br>
+                                </p>
                             </div>
 
                             <br>

@@ -41,6 +41,13 @@ var dashboard = new Vue
         {
 
         },
+        methods:
+        {
+            logSth: function()
+            {
+                console.log("haha");
+            }
+        },
     }
 );
 
@@ -126,6 +133,34 @@ var city_positions =
 Plotly.plot
 (
     $(".figure.generation")[0],
+    [
+        {
+            x: [1, 2, 3, 4, 5, 1.5],
+            y: [1, 2, 4, 8, 16, 7.5],
+        }
+    ],
+    {
+        margin: { t: 0 }
+    }
+);
+
+Plotly.plot
+(
+    $(".figure.fitness.trend")[0],
+    [
+        {
+            x: [1, 2, 3, 4, 5, 1.5],
+            y: [1, 2, 4, 8, 16, 7.5],
+        }
+    ],
+    {
+        margin: { t: 0 }
+    }
+);
+
+Plotly.plot
+(
+    $(".figure.total_distance.trend")[0],
     [
         {
             x: [1, 2, 3, 4, 5, 1.5],
