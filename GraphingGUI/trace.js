@@ -54,7 +54,7 @@
 
     NOTE:
         1.The fitness could actually be computed from distance, but formally it should be provided in the data file.
-        2.The individuals
+        2.The individuals sorted by their fitness in descent order.
         3.Please output the generation history to a text file named trace.js
             this is a json file so I can directly make use of it.
 */
