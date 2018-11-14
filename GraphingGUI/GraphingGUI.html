@@ -1,0 +1,87 @@
+<!--
+
+--->
+<!--*********************************************************************************************-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!-- using libraries ////////////////////////////////////////////////////////////////////////-->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!-- using stylesheet ///////////////////////////////////////////////////////////////////////-->
+    <link rel="stylesheet" href="GraphingGUI.css">
+    <!-- import data files //////////////////////////////////////////////////////////////////////-->
+    <script src="TSP_WesternSahara_29.js"></script>
+    <script src="testdata.js"></script>
+    <!--script src="TSP_Uruguay_734.js"></script-->
+    <!--script src="TSP_Canada_4663.js"></script-->
+</head>
+
+<body>
+    <div id="title">TSP solving by GA Graphing Tool</div>
+    <hr>
+    <div id="content">
+        <table>
+            <tbody>
+                <tr>
+                    <td>
+                        <span class="figure title">Fitness trend</span>
+                        <div class="figure fitness trend"></div>
+                        <span class="figure title">Total distance trend</span>
+                        <div class="figure total_distance trend"></div>
+                    </td>
+                    <td style="border-left: 1px solid grey;">
+                        <span class="figure title">Generation</span>
+                        <div class="figure generation"></div>
+                    </td>
+                    <td>
+                        <div id="dashboard">
+                            <br>
+                            <span class="title generation">Generation</span>
+                            <div class="generation content">
+                                Now showing the best ___n___ individual of generation ___N___.
+                                <br>
+                                <span>select generation:</span>【A-SLIDER-HERE】
+                                <br>
+                                <span>select best n individual:</span>【A-SLIDER-HERE】(supports only best 10 individuals)
+                            </div>
+
+                            <br>
+                            <span class="title fitness">Fitness</span>
+                            <div class="fitness content">
+                                average fitness: ___???___<br>
+                                lowest fitness: ___???___<br>
+                                highest fitness: ___???___<br>
+                            </div>
+
+                            <br>
+                            <span class="title total_distance">Total distance</span>
+                            <div class="fitness content">
+                                current individual fitness: ___???___<br>
+                                generation lowest fitness: ___???___<br>
+                                generation highest fitness: ___???___<br>
+                            </div>
+
+                            <br>
+                            <span class="title travel_route">Travel route</span>
+                            <div class="travel_route content">
+                                <textarea name="travel_route" rows="20"></textarea>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+
+<script src="GraphingGUI.js" charset="utf-8"></script>
+
+</html>

@@ -8,7 +8,7 @@
         route = a sequence of city IDs    (chromosome)
             e.g. [3, 5, 4, 8, 7, 1, 6, 2, ...]
     (2)Evaluation
-        route_length = distance(route) = ∑|cityDist(i,i+1)|
+        route_length = distance(route) = ∑cityDist(i,i+1)
         fitness could be evaluated in three ways
             1.favor and adapt the least one route_length
             2.1 / route_length
@@ -19,10 +19,11 @@
     (4)Mutation
         randomly swap two city IDs in route sequence
     (5)Selection
-        tournament
+        tournament selection
 
 #3.Advanced technique
-    ...
+    elitism
+    adaptive parameter
 
 #4.Runtime optimization
     multithreads when data is considerable large
@@ -30,3 +31,6 @@
     hash table to save data
 
 #5.Organizaion & labour division
+    code: Ming
+    graph: Tingrui
+    report: Justin
