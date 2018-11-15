@@ -21,11 +21,12 @@ def COWGC(parent1, parent2, city_map):
     cut_point1, distance1 = cal_cut_point_COWGC(p1_city_objects)
     cut_point2, distance2 = cal_cut_point_COWGC(p2_city_objects)
 
+    """
     print("cut point: ",cut_point1, cut_point2)
     print("distance: ",distance1, distance2)
     print("city1 cut:",parent1.tour[cut_point1])
     print("city2 cut:",parent2.tour[cut_point2])
-
+    """
     #Modified crossover
     if distance1 > distance2:
         offspring1, offspring2 = modified_crossover_COWGC(parent1, parent2,cut_point1, city_map)
@@ -126,4 +127,3 @@ o22 = set(o2.tour)
 print(len(o11))
 print(len(o22))
 """
-

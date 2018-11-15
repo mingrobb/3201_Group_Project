@@ -18,12 +18,12 @@ class Population(object):
         """
         self.size = size
         self.city_map = city_map
-        self.population = {}
+        self.population = []
 
         for i in range(size):
             new_tour = Tour.Tour(self.city_map)
             fitness = new_tour.fitness
-            self.population[i] = [new_tour, fitness]
+            self.population.append([new_tour, fitness])
 
 
 
@@ -34,9 +34,11 @@ class Population(object):
 ########################
 """
 size = 10
-file  = "Cities/TSP_WesternSahara_29.txt"
-p = Population(10,file)
-for k,v in p.population.items():
-    print(k, v)
-    print(v[0].city_objects)
+file = "Cities/TSP_WesternSahara_29.txt"
+c = CityMap.CityMap(file)
+city_map = c.city_map
+p = Population(10, city_map)
+for i in p.population:
+    print(i)
+    print(i[0].city_objects)
 """
