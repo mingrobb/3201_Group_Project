@@ -1,0 +1,134 @@
+<!--
+
+--->
+<!--*********************************************************************************************-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>GraphingGUI</title>
+    <!-- using libraries ////////////////////////////////////////////////////////////////////////-->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <!-- using stylesheet ///////////////////////////////////////////////////////////////////////-->
+    <link rel="stylesheet" href="GraphingGUI.css">
+    <!-- import data files //////////////////////////////////////////////////////////////////////-->
+    <script src="trace.js"></script>
+</head>
+
+<body>
+    <div id="title">TSP solving by GA Graphing Tool</div>
+    <div id="content">
+        <el-tabs class="tabs" type="border-card">
+            <el-tab-pane class="evolution page" label="Evolution">
+                <div :style="x_style_area">
+                    整个进化<br>
+                    fitness走势（根据每一代的max、avg、min适应度）<br>
+                    distance走势（根据每一代的max、avg、min总路程）<br>
+                </div>
+            </el-tab-pane>
+            <el-tab-pane class="generation page" label="Generation">
+                <div :style="x_style_area">
+                    世代<br>
+                    （当前选中的）这一世代的fitness分布<br>
+                    （当前选中的）这一世代的distance分布<br>
+                </div>
+            </el-tab-pane>
+            <el-tab-pane class="individual page" label="Individual">
+                <div :style="x_style_area">
+                    个体<br>
+                    （当前选中的）这一个体的map<br>
+                </div>
+            </el-tab-pane>
+            <el-tab-pane class="plain-map page" label="Plain Map">
+                <div :style="x_style_area">
+                    朴素地图<br>
+                </div>
+            </el-tab-pane>
+        </el-tabs>
+        <el-button class="dashboard button" @click="toggleDashboard()" size="medium">
+            Dashboard
+        </el-button>
+        <div class="dashboard panel" v-show="show_dashboard">
+            <p style="color: grey;">Currently showing the best ___nth___ individual of generation ___N___.</p>
+
+            <div class="divbar"></div>
+            <h4>Select generation</h4>
+            <el-slider v-model="generation_n" show-input></el-slider>
+
+            <div class="divbar"></div>
+            <h4>Select individual</h4>
+            <el-slider v-model="individual_n" show-input></el-slider>
+
+            <div class="divbar"></div>
+            <h4>Details</h4>
+            <div class="details indent20">
+                <h5>generation</h5>
+                    <span class="indent20">fitness</span>
+                    <table class="indent40">
+                        <tbody>
+                            <tr>
+                                <td>average:</td>
+                                <td>__???__</td>
+                            </tr>
+                            <tr>
+                                <td>lowest:</td>
+                                <td>__???__</td>
+                            </tr>
+                            <tr>
+                                <td>heighest:</td>
+                                <td>__???__</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <br>
+                    <span class="indent20">distance</span>
+                    <table class="indent40">
+                        <tbody>
+                            <tr>
+                                <td>average:</td>
+                                <td>__???__</td>
+                            </tr>
+                            <tr>
+                                <td>shortest:</td>
+                                <td>__???__</td>
+                            </tr>
+                            <tr>
+                                <td>longest:</td>
+                                <td>__???__</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                <h5>individual</h5>
+                <table class="indent20">
+                    <tbody>
+                        <tr>
+                            <td>fitness:</td>
+                            <td>__???__</td>
+                        </tr>
+                        <tr>
+                            <td>distance:</td>
+                            <td>__???__</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <br>
+            </div>
+
+            <div class="divbar"></div>
+            <h4>Route</h4>
+            <textarea name="route" rows="8" style="width: 100%;"></textarea>
+        </div>
+    </div>
+</body>
+
+<script src="GraphingGUI.js" charset="utf-8"></script>
+
+</html>

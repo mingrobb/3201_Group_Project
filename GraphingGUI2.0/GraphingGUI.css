@@ -1,0 +1,91 @@
+*{
+    font-family: microsoft yahei ui;
+    box-sizing: border-box;
+    color: black;
+    line-height: normal;
+    font-weight: normal;
+    /*font-size: initial;*/
+}
+
+html{
+    font-size: 16px；
+}
+body{
+    margin: 8px;
+}
+
+#title {
+    display: flex;
+    height: 30px;
+    line-height: 30px;
+    justify-content: center;
+    font-size: 1.5rem;
+}
+
+.tab:hover{
+    cursor: default;
+}
+
+.v-tabs__bar{
+    height: 48px;
+}
+
+.v-tabs__wrapper{
+    background-color: grey;
+}
+
+.v-tabs__slider{
+    background-color: black;
+}
+
+.dashboard.button{
+    position: absolute;
+    right: 0px;
+}
+
+.page{
+    background-color: whitesmoke;
+}
+
+.dashboard.panel{
+    position: fixed;
+    height: 100%;
+    width: 400px;
+    right: 0px;
+    top: 78px;
+    border-left: 1px solid grey;
+    z-index: 100;
+    background-color: white;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**/
