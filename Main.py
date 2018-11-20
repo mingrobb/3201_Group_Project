@@ -13,12 +13,12 @@ def main():
     uruguay734 = "Cities/TSP_Uruguay_734.txt"
     canada4663 = "Cities/TSP_Canada_4663.txt"
 
-    popsize = 5000
-    mating_pool_size = 1000
+    popsize = 500
+    mating_pool_size = 100
     tournament_size = 3
     mut_rate = 0.2
     xover_rate = 0.9
-    gen_limit = 1500
+    gen_limit = 15
 
     print("Preparing information...")
     c = CityMap.CityMap(western29 )
@@ -62,6 +62,7 @@ def main():
 
             offsprings.append([off1, off1.fitness])
             offsprings.append([off2, off2.fitness])
+
             i += 2
 
         #survial selection
