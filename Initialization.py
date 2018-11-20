@@ -1,5 +1,4 @@
 import Tour
-import CityMap
 
 class Population(object):
     """
@@ -32,13 +31,12 @@ class Population(object):
 ######    Test    ######
 ######            ######
 ########################
-"""
+""""
 size = 10
 file = "Cities/TSP_WesternSahara_29.txt"
 c = CityMap.CityMap(file)
 city_map = c.city_map
 p = Population(10, city_map)
 for i in p.population:
-    print(i)
-    print(i[0].city_objects)
+    print(i[1])
 """

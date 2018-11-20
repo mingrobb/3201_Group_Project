@@ -1,5 +1,5 @@
 import random
-import CityMap
+import math
 
 class Tour(object):
     """

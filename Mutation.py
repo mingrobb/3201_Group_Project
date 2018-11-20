@@ -1,5 +1,4 @@
 import Tour
-import CityMap
 import random
 
 def WGWWGM(individual, city_map):
@@ -58,6 +57,15 @@ def WGWRGM(individual, city_map):
     offspring = Tour.Tour(city_map, tour)
 
     return offspring
+
+def random_mutate(indiidual, city_map):
+    """
+
+    :param indiidual:
+    :param city_map:
+    :return:
+    """
+
 
 ########################
 ######            ######
