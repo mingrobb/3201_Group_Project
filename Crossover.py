@@ -2,6 +2,7 @@
 import Tour
 import Initialization
 import CityMap
+from numpy import random
 
 def COWGC(parent1, parent2, city_map):
     """
@@ -93,6 +94,37 @@ def modified_crossover_COWGC(parent1, parent2, cut_point, city_map):
 
     return offspring1, offspring2
 
+def order_crossover(parent1, parent2, city_map):
+    """
+    A function to apply order crossover with given parents
+    :param parent1: a list with tour object
+    :param parent2: a list with tour object
+    :return: the offspring
+    """
+    individual_size = len(parent1.tour)
+    offspring = [None] * individual_size
+
+    ## Generate random points
+    points = random.randint(1, individual_size - 1, 2)
+    while points[0] == points[1]:
+        points = random.randint(1, individual_size - 1, 2)
+    if (points[0] > points[1]):
+            points[0], points[1] = points[1], points[0]
+
+    ## Perform crossover to generate offspring
+    for i in range(points[0], points[1] + 1):
+        offspring[i] = parent1.tour[i]
+    i = points[1] + 1
+    while offspring[i] == None:
+        j = i
+        while parent2.tour[j] in offspring:
+            j = (j + 1) % individual_size
+        offspring[i] = parent2.tour[j]
+        i = (i + 1) % individual_size
+
+    offspring1 = Tour.Tour(city_map, offspring)
+
+    return offspring1
 
 ########################
 ######            ######
@@ -120,4 +152,21 @@ o11 =set(o1.tour)
 o22 = set(o2.tour)
 print(len(o11))
 print(len(o22))
+"""
+"""
+file  = "Cities/TSP_WesternSahara_29.txt"
+c = CityMap.CityMap(file)
+city_map = c.city_map
+Object = Initialization.Population(4, city_map)
+pop = Object.population
+p1 = pop[0]
+p2 = pop[1]
+print("parents:")
+print(p1.tour)
+print(p2.tour)
+off1= order_crossover(p1.tour, p2.tour, city_map)
+print("offsprings:")
+print(off1.tour)
+t = set(off1.tour)
+print(len(t))
 """

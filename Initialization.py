@@ -1,4 +1,5 @@
 import Tour
+import CityMap
 
 class Population(object):
     """
@@ -18,12 +19,28 @@ class Population(object):
         self.size = size
         self.city_map = city_map
         self.population = []
+        self.bestTour = None
 
         for i in range(size):
             new_tour = Tour.Tour(self.city_map)
-            fitness = new_tour.fitness
-            self.population.append([new_tour, fitness])
+            self.population.append(new_tour)
 
+    def evalPopulation(self):
+        """
+
+        :return:
+        """
+        self.bestTour = self.population[0]
+        offset = 0
+        for i in range(len(self.population)):
+            if self.population[i].length < self.bestTour.length:
+                self.bestTour = self.population[i]
+                offset = i
+
+        temp = self.population[offset]
+        if offset != 0:
+            self.population[offset] = self.population[0]
+            self.population[0] = temp
 
 
 ########################
@@ -31,12 +48,16 @@ class Population(object):
 ######    Test    ######
 ######            ######
 ########################
-""""
+"""
 size = 10
 file = "Cities/TSP_WesternSahara_29.txt"
 c = CityMap.CityMap(file)
 city_map = c.city_map
 p = Population(10, city_map)
 for i in p.population:
-    print(i[1])
+    print(i.tour)
+print()
+p.evalPopulation()
+for i in p.population:
+    print(i.tour)
 """
