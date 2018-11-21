@@ -1,5 +1,4 @@
 import random
-
 import CityMap
 import Initialization
 import Crossover
@@ -20,14 +19,16 @@ def main():
     xover_rate = 0.9
     gen_limit = 500
 
-    print("Preparing information...")
+    print("Preparing for the information...")
     c = CityMap.CityMap(western29)
     city_map = c.city_map
     print("preparation end.")
 
     gen = 0
+    print("Initialize population...")
     init = Initialization.Population(popsize, city_map)
     init.evalPopulation()
+    print("Initialization end.")
 
     #EA algorithm
     while gen < gen_limit:
@@ -64,6 +65,7 @@ def main():
 
             offsprings.append(off1)
             offsprings.append(off2)
+            #print(len(offsprings))
 
             i += 2
 
@@ -74,7 +76,7 @@ def main():
 
         init.evalPopulation()
 
-        print("generation: ", gen, "shortest length: ", init.bestTour.length)
+        print("generation:", gen, " Average length:", init.AverageLength, " Longest length: ", init.worstTour.length, " shortest length:", init.bestTour.length)
 
         gen += 1
 
