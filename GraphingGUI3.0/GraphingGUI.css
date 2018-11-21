@@ -32,7 +32,7 @@ body{
 }
 
 .tabs{
-    height: 1000px;
+    height: 1100px;
 }
 
 .dashboard.button{
@@ -47,7 +47,7 @@ body{
 
 .dashboard.panel{
     position: absolute;
-    height: 959px;
+    height: 1059px;
     width: 400px;
     right: 1px;
     top: 70px;
@@ -71,6 +71,26 @@ body{
 .indent40{
     margin-left: 40px;
 }
+
+/* figures //////////////////////////////////////////////////////////////////////////////////////*/
+
+.figure{
+    width: 100%;
+}
+
+.figure.fitness, .figure.distance{
+    height: 450px;
+}
+
+.figure.route, .figure.map{
+    height: 1000px;
+    width: 1400px;
+}
+
+
+
+
+
 
 
 

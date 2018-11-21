@@ -20,6 +20,9 @@
     <!-- using stylesheet ///////////////////////////////////////////////////////////////////////-->
     <link rel="stylesheet" href="GraphingGUI.css">
     <!-- import data files //////////////////////////////////////////////////////////////////////-->
+    <script src="coords_Canada.js"></script>
+    <script src="coords_Uruguay.js"></script>
+    <script src="coords_WesternSahara.js"></script>
     <script src="trace.js"></script>
 </head>
 
@@ -29,27 +32,32 @@
         <el-tabs class="tabs" type="border-card">
             <el-tab-pane class="evolution page" label="Evolution">
                 <div :style="x_style_area">
-                    整个进化<br>
-                    fitness走势（根据每一代的max、avg、min适应度）<br>
-                    distance走势（根据每一代的max、avg、min总路程）<br>
+                    fitness trend（based on each generation's max、avg、min fitness）<br>
+                    <div class="figure fitness trend"></div>
+                    <div class="divbar"></div>
+                    distance trend（based on each generation's max、avg、min distance）<br>
+                    <div class="figure distance trend"></div>
                 </div>
             </el-tab-pane>
             <el-tab-pane class="generation page" label="Generation">
                 <div :style="x_style_area">
-                    世代<br>
-                    （当前选中的）这一世代的fitness分布<br>
-                    （当前选中的）这一世代的distance分布<br>
+                    （current selected）current generation's fitness distribution<br>
+                    <div class="figure fitness distribution"></div>
+                    <div class="divbar"></div>
+                    （current selected）current generation's distance distribution<br>
+                    <div class="figure distance distribution"></div>
                 </div>
             </el-tab-pane>
             <el-tab-pane class="individual page" label="Individual">
                 <div :style="x_style_area">
-                    个体<br>
-                    （当前选中的）这一个体的map<br>
+                    （current selected）current individual's map<br>
+                    <div class="figure route"></div>
                 </div>
             </el-tab-pane>
             <el-tab-pane class="plain-map page" label="Plain Map">
                 <div :style="x_style_area">
-                    朴素地图<br>
+                    plain map<br>
+                    <div class="figure map"></div>
                 </div>
             </el-tab-pane>
         </el-tabs>
@@ -61,11 +69,11 @@
 
             <div class="divbar"></div>
             <h4>Select generation</h4>
-            <el-slider v-model="generation_n" show-input></el-slider>
+            <el-slider v-model="generation_n" :min="0" show-input></el-slider>
 
             <div class="divbar"></div>
             <h4>Select individual</h4>
-            <el-slider v-model="individual_n" show-input></el-slider>
+            <el-slider v-model="individual_n" :min="1" show-input></el-slider>
 
             <div class="divbar"></div>
             <h4>Details</h4>
@@ -124,7 +132,7 @@
 
             <div class="divbar"></div>
             <h4>Route</h4>
-            <textarea name="route" rows="8" style="width: 100%;"></textarea>
+            <textarea name="route" rows="10" style="width: 100%;"></textarea>
         </div>
     </div>
 </body>
