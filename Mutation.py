@@ -1,5 +1,83 @@
 import Tour
 import random
+import CityMap
+
+def inversion_mutation(individual, city_map):
+    """
+
+    :param indeividual:
+    :param citymap:
+    :return:
+    """
+    tour = individual.tour
+    point1 = random.randint(0, len(tour)-1)
+    while point1 == len(tour)-1:
+        point1 = random.randint(0, len(tour)-1)
+    point2 = random.randint(point1+1, len(tour)-1)
+
+    partial_tour = tour[point1:point2+1]
+    reversed= partial_tour[::-1]
+
+    tour[point1:point2+1] = reversed
+
+    offspring = Tour.Tour(city_map, tour)
+
+    return offspring
+
+def RGIBNNM_mutation(individual, city_map):
+    """
+
+    :param individual:
+    :param city_map:
+    :return:
+    """
+    tour = individual.tour
+    rand_idx = random.randint(0, len(tour)-1)
+    city = tour[rand_idx]
+
+    #find the nearest city
+    distance_to = city_map[city].distances
+    #nearest_city = min(distance_to.keys(), key=(lambda k: distance_to[k]))
+    nearest_city = sorted(distance_to.items(), key=lambda kv: kv[1], reverse=False)[1][0]
+
+    #get a random city around nearest_city (range = 5)
+    d = city_map[nearest_city].distances
+    five_neignbours = sorted(d.items(), key=lambda kv: kv[1], reverse=False)[1:6]
+    selected = random.choice(five_neignbours)[0]
+
+    n_i = 0
+    s_i = 0
+    for i in range(len(tour)):
+        if tour[i] == nearest_city:
+            n_i = i
+        if tour[i] == selected:
+            s_i = i
+
+    temp = tour[n_i]
+    tour[n_i] = tour[s_i]
+    tour[s_i] = temp
+
+    offspring = Tour.Tour(city_map, tour)
+
+    return offspring
+
+
+def IRGIBNNM_mutation(individual, city_map):
+    """
+
+    :param indeividual:
+    :param city_map:
+    :return:
+    """
+    #apply inversion mutation first
+    invert = inversion_mutation(individual, city_map)
+
+    #apply RGIBNNM mutation
+    offspring = RGIBNNM_mutation(invert, city_map)
+
+    return offspring
+
+
 
 def WGWWGM(individual, city_map):
     """
@@ -83,6 +161,25 @@ print("WGWRGM: ",mutant1.tour)
 mutant2 = WGWWGM(tour,city_map)
 print("WGWWGM: ",mutant2.tour)
 """
-
-
-
+"""
+Inversion mutation
+file  = "Cities/TSP_WesternSahara_29.txt"
+c = CityMap.CityMap(file)
+city_map = c.city_map
+tour = Tour.Tour(city_map)
+print(tour.tour)
+mut = inversion_mutation(tour, city_map)
+print(mut.tour)
+s = set(mut.tour)
+print(len(s))
+"""
+"""
+#RGIBNNM
+file  = "Cities/TSP_WesternSahara_29.txt"
+c = CityMap.CityMap(file)
+city_map = c.city_map
+tour = Tour.Tour(city_map)
+print(tour.tour)
+mut = IRGIBNNM_mutation(tour, city_map)
+print(mut.tour)
+"""

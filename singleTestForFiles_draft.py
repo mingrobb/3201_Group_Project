@@ -148,3 +148,15 @@ print("WGWRGM: ",mutant1.tour)
 mutant2 = WGWWGM(tour,city_map)
 print("WGWWGM: ",mutant2.tour)
 """
+"""
+Inversion mutation
+file  = "Cities/TSP_WesternSahara_29.txt"
+c = CityMap.CityMap(file)
+city_map = c.city_map
+tour = Tour.Tour(city_map)
+print(tour.tour)
+mut = inversion_mutation(tour, city_map)
+print(mut.tour)
+s = set(mut.tour)
+print(len(s))
+"""

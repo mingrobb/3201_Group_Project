@@ -59,8 +59,12 @@ def main():
             #print("Mutation...")
             if random.random() < mut_rate:
                 off1 = Mutation.WGWWGM(p1, city_map)
+                #off1 = Mutation.IRGIBNNM_mutation(p1, city_map)
+                #off1 = Mutation.inversion_mutation(p1, city_map)
             if random.random() < mut_rate:
                 off2 = Mutation.WGWWGM(p2, city_map)
+                #off2 = Mutation.IRGIBNNM_mutation(p2, city_map)
+                #off2 = Mutation.inversion_mutation(p2, city_map)
             #print("Mutation end")
 
             offsprings.append(off1)
