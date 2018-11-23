@@ -25,7 +25,6 @@ class Tour(object):
         else:
             self.tour = sorted(list(self.cities), key=lambda *args: random.random())
             self.length = self.cal_len()
-        self.fitness = 1/self.length
 
 
     def cal_len(self):

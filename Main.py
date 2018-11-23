@@ -1,5 +1,4 @@
 import random
-
 import CityMap
 import Initialization
 import Crossover
@@ -20,14 +19,16 @@ def main():
     xover_rate = 0.9
     gen_limit = 500
 
-    print("Preparing information...")
+    print("Preparing for the information...")
     c = CityMap.CityMap(western29)
     city_map = c.city_map
     print("preparation end.")
 
     gen = 0
+    print("Initialize population...")
     init = Initialization.Population(popsize, city_map)
     init.evalPopulation()
+    print("Initialization end.")
 
     #EA algorithm
     while gen < gen_limit:
@@ -58,12 +59,17 @@ def main():
             #print("Mutation...")
             if random.random() < mut_rate:
                 off1 = Mutation.WGWWGM(p1, city_map)
+                #off1 = Mutation.IRGIBNNM_mutation(p1, city_map)
+                #off1 = Mutation.inversion_mutation(p1, city_map)
             if random.random() < mut_rate:
                 off2 = Mutation.WGWWGM(p2, city_map)
+                #off2 = Mutation.IRGIBNNM_mutation(p2, city_map)
+                #off2 = Mutation.inversion_mutation(p2, city_map)
             #print("Mutation end")
 
             offsprings.append(off1)
             offsprings.append(off2)
+            #print(len(offsprings))
 
             i += 2
 
@@ -74,7 +80,7 @@ def main():
 
         init.evalPopulation()
 
-        print("generation: ", gen, "shortest length: ", init.bestTour.length)
+        print("generation:", gen, " Average length:", init.AverageLength, " Longest length: ", init.worstTour.length, " shortest length:", init.bestTour.length)
 
         gen += 1
 
