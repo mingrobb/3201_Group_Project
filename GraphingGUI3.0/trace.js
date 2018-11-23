@@ -1,6 +1,6 @@
 /*
     for example, for
-        population size = 100
+        population size = 10（only records 10 best individuals）
         total generations = 50
     the data structure is:
 
