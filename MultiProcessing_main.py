@@ -60,8 +60,8 @@ class EAProcess(multiprocessing.Process):
             # print(len(offsprings))
 
             i += 2
-        print('end')
         q.put(offspring)
+        print('end')
 
 
 
@@ -106,6 +106,11 @@ if __name__ == '__main__':
         pro3 = EAProcess(q, parents, city_map, sub_mating_pool_size, mut_rate, xover_rate)
         pro4 = EAProcess(q, parents, city_map, sub_mating_pool_size, mut_rate, xover_rate)
 
+        pro1.daemon = True
+        pro2.daemon = True
+        pro3.daemon = True
+        pro4.daemon = True
+
         pro1.start()
         pro2.start()
         pro3.start()
@@ -115,6 +120,11 @@ if __name__ == '__main__':
         pro2.join()
         pro3.join()
         pro4.join()
+
+        pro1.terminate()
+        pro2.terminate()
+        pro3.terminate()
+        pro4.terminate()
 
         sub1 = q.get()
         sub2 = q.get()
