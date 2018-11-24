@@ -1,4 +1,19 @@
 <!--
+    需要作图的内容：
+        性能
+            basic的完成用时 - advanced的完成用时（线条图）
+                位于experiment中，x = 10次trial，y = 两者的用时
+        效用
+            basic的三种适应度 - advanced的三种适应度（线条图）
+                位于experiment中，x = 10次trial，y = 两者的三种最终适应度
+        generation
+            适应度分布
+            距离分布
+        individual
+            地图路线
+        evolution
+            适应度随世代趋势
+            距离随世代趋势
 
 --->
 <!--*********************************************************************************************-->
@@ -30,8 +45,18 @@
     <div id="title">TSP solving by GA Graphing Tool</div>
     <div id="content">
         <el-tabs class="tabs" type="border-card">
+            <el-tab-pane class="experiment page" label="Experiment">
+                <div :style="x_style_area" style="overflow: auto;">
+                    <h4>An experiment consists of 10 runs (evolution trials)</h4>
+                    runs trend（based on each run）<br>
+                    <div class="figure fitness trend"></div>
+                    <div class="divbar"></div>
+                    distance trend（based on each generation's max、avg、min distance）<br>
+                    <div class="figure distance trend"></div>
+                </div>
+            </el-tab-pane>
             <el-tab-pane class="evolution page" label="Evolution">
-                <div :style="x_style_area">
+                <div :style="x_style_area" style="overflow: auto;">
                     fitness trend（based on each generation's max、avg、min fitness）<br>
                     <div class="figure fitness trend"></div>
                     <div class="divbar"></div>
@@ -40,7 +65,7 @@
                 </div>
             </el-tab-pane>
             <el-tab-pane class="generation page" label="Generation">
-                <div :style="x_style_area">
+                <div :style="x_style_area" style="overflow: auto;">
                     （current selected）current generation's fitness distribution<br>
                     <div class="figure fitness distribution"></div>
                     <div class="divbar"></div>
@@ -49,23 +74,33 @@
                 </div>
             </el-tab-pane>
             <el-tab-pane class="individual page" label="Individual">
-                <div :style="x_style_area">
+                <div :style="x_style_area" style="overflow: auto;">
                     （current selected）current individual's map<br>
                     <div class="figure route"></div>
                 </div>
             </el-tab-pane>
             <el-tab-pane class="plain-map page" label="Plain Map">
-                <div :style="x_style_area">
-                    plain map<br>
+                <div :style="x_style_area" style="overflow: auto;">
                     <div class="figure map"></div>
                 </div>
             </el-tab-pane>
         </el-tabs>
+        <el-select class="instance_selector" v-model="instance_select" placeholder="select an instance" @change="newDraw()">
+            <el-option :key="0" :value="'WesternSahara'">WesternSahara</el-option>
+            <el-option :key="1" :value="'Uruguay'">Uruguay</el-option>
+            <el-option :key="2" :value="'Canada'">Canada</el-option>
+        </el-select>
+        <el-checkbox-group class="algorithm checkbox" v-model="algorithm_select">
+            <el-checkbox label="basic">Basic</el-checkbox>
+            <el-checkbox label="advanced">Advanced</el-checkbox>
+        </el-checkbox-group>
         <el-button class="dashboard button" @click="toggleDashboard()" size="medium">
             Dashboard
         </el-button>
         <div class="dashboard panel" v-show="show_dashboard">
-            <p style="color: grey;">Currently showing the best ___nth___ individual of generation ___N___.</p>
+
+            <h4>Select trial</h4>
+            <el-slider v-model="trial_n" :min="1" :max="10" show-input></el-slider>
 
             <div class="divbar"></div>
             <h4>Select generation</h4>
@@ -73,7 +108,7 @@
 
             <div class="divbar"></div>
             <h4>Select individual</h4>
-            <el-slider v-model="individual_n" :min="1" show-input></el-slider>
+            <el-slider v-model="individual_n" :min="1" :max="10" show-input></el-slider>
 
             <div class="divbar"></div>
             <h4>Details</h4>
@@ -132,11 +167,12 @@
 
             <div class="divbar"></div>
             <h4>Route</h4>
-            <textarea name="route" rows="10" style="width: 100%;"></textarea>
+            <textarea name="route" rows="8" style="width: 100%;"></textarea>
         </div>
     </div>
 </body>
 
+<script src="draw.js" charset="utf-8"></script>
 <script src="GraphingGUI.js" charset="utf-8"></script>
 
 </html>

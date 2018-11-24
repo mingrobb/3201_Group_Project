@@ -12,8 +12,8 @@ def main():
     uruguay734 = "Cities/TSP_Uruguay_734.txt"
     canada4663 = "Cities/TSP_Canada_4663.txt"
 
-    popsize = 1500
-    mating_pool_size = 300
+    popsize = 2000
+    mating_pool_size = 1200
     tournament_size = 3
     mut_rate = 0.2
     xover_rate = 0.9
@@ -40,11 +40,11 @@ def main():
 
         offsprings = []
         i = 0
-        while len(offsprings) < mating_pool_size:
+        while len(offsprings) < mating_pool_size:    # 2 parents  ->  2 individuals
             p1 = parents[i]
             p2 = parents[i + 1]
 
-            #crossover
+            # crossover ################################################################################################
             #print("crossover...")
             if random.random() < xover_rate:
                 #off1, off2 = Crossover.COWGC(p1, p2, city_map)
@@ -55,7 +55,7 @@ def main():
                 off2 = copy.copy(p2)
             #print("crossover end")
 
-            #mutation
+            # mutation #################################################################################################
             #print("Mutation...")
             if random.random() < mut_rate:
                 off1 = Mutation.WGWWGM(p1, city_map)
@@ -73,7 +73,7 @@ def main():
 
             i += 2
 
-        #survial selection
+        # survial selection ############################################################################################
         #print("survival selection")
         init.population[1:] = Selection.mu_plus_lambda(init.population[1:], offsprings)
         #print("survival selection end")
