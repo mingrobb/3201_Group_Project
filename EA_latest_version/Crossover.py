@@ -3,6 +3,7 @@ import Tour
 import Initialization
 import CityMap
 from numpy import random
+import collections
 
 def COWGC(parent1, parent2, city_map):
     """
@@ -94,6 +95,56 @@ def modified_crossover_COWGC(parent1, parent2, cut_point, city_map):
 
     return offspring1, offspring2
 
+def order_crossover_n(parent1, parent2, city_map):
+    """
+
+    :param parent1:
+    :param parent2:
+    :param city_map:
+    :return:
+    """
+    p1 = parent1.tour
+    p2 = parent2.tour
+    off1 = collections.deque()
+    off2 = collections.deque()
+    length = len(p1)
+
+    points = random.randint(1, length-1, 2)
+    if points[0] > points[1]:
+        points[0], points[1] = points[1], points[0]
+
+    cut1 = points[0]
+    cut2 = points[1]
+
+    part1 = p1[cut1:cut2+1]
+    part2 = p2[cut1:cut2+1]
+
+    for i in range(length):
+        if p1[i] in part2:
+            off1.appendleft(None)
+        else:
+            off1.append(p1[i])
+        if p2[i] in part1:
+            off2.appendleft(None)
+        else:
+            off2.append(p2[i])
+
+    off1.rotate(cut1)
+    off2.rotate(cut1)
+    j = 0
+    for i in range(cut1, cut2+1):
+        off1[i] = part2[j]
+        off2[i] = part1[j]
+        j += 1
+
+
+    offspring1 = Tour.Tour(city_map, list(off1))
+    offspring2 = Tour.Tour(city_map, list(off2))
+
+    return offspring1, offspring2
+
+
+
 def order_crossover(parent1, parent2, city_map):
     """
     A function to apply order crossover with given parents
@@ -165,6 +216,23 @@ print("parents:")
 print(p1.tour)
 print(p2.tour)
 off1= order_crossover(p1.tour, p2.tour, city_map)
+print("offsprings:")
+print(off1.tour)
+t = set(off1.tour)
+print(len(t))
+"""
+"""
+file  = "Cities/TSP_WesternSahara_29.txt"
+c = CityMap.CityMap(file)
+city_map = c.city_map
+Object = Initialization.Population(4, city_map)
+pop = Object.population
+p1 = pop[0]
+p2 = pop[1]
+print("parents:")
+print(p1.tour)
+print(p2.tour)
+off1, off2= order_crossover_n(p1, p2, city_map)
 print("offsprings:")
 print(off1.tour)
 t = set(off1.tour)
