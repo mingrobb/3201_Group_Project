@@ -1,11 +1,12 @@
 import random
-import CityMap
-import Initialization
 
 def tournament_selection(population, mating_pool_size, tournament_size):
     """
-
-    :return:
+    Tournament selection
+    :param population: A list of tour objects
+    :param mating_pool_size: mating pool size
+    :param tournament_size: tournament size
+    :return: individuals that selected into the mating pool
     """
     selected_to_mate = []
     mating_pool = random.sample(population, mating_pool_size)
@@ -24,10 +25,10 @@ def tournament_selection(population, mating_pool_size, tournament_size):
 
 def mu_plus_lambda(cur_pop, offsprings):
     """
-
-    :param cur_pop:
-    :param offsprings:
-    :return:
+    Mu plus lambda selection
+    :param cur_pop: current population
+    :param offsprings: current offspring
+    :return: new population
     """
     length = len(cur_pop)
     temp_pop = cur_pop + offsprings
@@ -39,35 +40,3 @@ def mu_plus_lambda(cur_pop, offsprings):
 
     return pop
 
-
-
-########################
-######            ######
-######    Test    ######
-######            ######
-########################
-"""
-file  = "Cities/TSP_WesternSahara_29.txt"
-c = CityMap.CityMap(file)
-city_map = c.city_map
-Object = Initialization.Population(30, city_map)
-pop = Object.population
-s = tournament_selection(pop, 10, 3)
-print(len(s))
-for i in s:
-    print(i[0].tour, i[1])
-"""
-"""
-file  = "Cities/TSP_WesternSahara_29.txt"
-c = CityMap.CityMap(file)
-city_map = c.city_map
-Object = Initialization.Population(2, city_map)
-off1 = Initialization.Population(1, city_map)
-print('off length:', off1.population[0].length)
-off2 = Initialization.Population(1, city_map)
-for i in Object.population:
-    print(i.length)
-pop = mu_plus_lambda(Object.population, off1.population)
-for i in pop:
-    print(i.length)
-"""

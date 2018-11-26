@@ -1,7 +1,5 @@
 
 import Tour
-import Initialization
-import CityMap
 from numpy import random
 import collections
 
@@ -17,11 +15,11 @@ def COWGC(parent1, parent2, city_map):
     :param parent2: parent tour2
     :return: offspring tour1 and offspring tour2
     """
-    p1_city_objects = parent1.city_objects
-    p2_city_objects = parent2.city_objects
+    #p1_city_objects = parent1.city_objects
+    #p2_city_objects = parent2.city_objects
 
-    cut_point1, distance1 = cal_cut_point_COWGC(p1_city_objects)
-    cut_point2, distance2 = cal_cut_point_COWGC(p2_city_objects)
+    cut_point1, distance1 = cal_cut_point_COWGC(parent1)
+    cut_point2, distance2 = cal_cut_point_COWGC(parent2)
 
     #Modified crossover
     if distance1 > distance2:
@@ -39,10 +37,10 @@ def cal_cut_point_COWGC(parent):
     :param parent: a list of parent city objects
     :return: the cut point
     """
-    length = len(parent)
-    max_distance = 0
-    cut_point = 0
+    cut_point = parent.worst_idx[1]
+    max_distance = parent.max_distance
 
+    """
     for city in range(length):
         cur_city = parent[city]
         cur_city.cal_distance()
@@ -59,6 +57,7 @@ def cal_cut_point_COWGC(parent):
             if distance > max_distance:
                 max_distance = distance
                 cut_point = 0
+    """
 
     return cut_point, max_distance
 
@@ -75,8 +74,8 @@ def modified_crossover_COWGC(parent1, parent2, cut_point, city_map):
     tour2 = parent2.tour
     p1_left = tour1[:cut_point]
     p2_left = tour2[:cut_point]
-    off1 = p1_left
-    off2 = p2_left
+    off1 = collections.deque(p1_left)
+    off2 = collections.deque(p2_left)
 
     for i in tour2:
         if i not in p1_left:
@@ -90,17 +89,17 @@ def modified_crossover_COWGC(parent1, parent2, cut_point, city_map):
         else:
             continue
 
-    offspring1 = Tour.Tour(city_map, off1)
-    offspring2 = Tour.Tour(city_map, off2)
+    offspring1 = Tour.Tour(city_map, list(off1))
+    offspring2 = Tour.Tour(city_map, list(off2))
 
     return offspring1, offspring2
 
-def order_crossover_n(parent1, parent2, city_map):
+def order_crossover(parent1, parent2, city_map):
     """
-
-    :param parent1:
-    :param parent2:
-    :param city_map:
+    Perform order crossover between two parents and generate two offsprings
+    :param parent1: a tour object
+    :param parent2: a tour object
+    :param city_map: a map that contains all the city information
     :return:
     """
     p1 = parent1.tour
@@ -144,97 +143,3 @@ def order_crossover_n(parent1, parent2, city_map):
     return offspring1, offspring2
 
 
-
-def order_crossover(parent1, parent2, city_map):
-    """
-    A function to apply order crossover with given parents
-    :param parent1: a list with tour object
-    :param parent2: a list with tour object
-    :return: the offspring
-    """
-    individual_size = len(parent1.tour)
-    offspring = [None] * individual_size
-
-    ## Generate random points
-    points = random.randint(1, individual_size - 1, 2)
-    while points[0] == points[1]:
-        points = random.randint(1, individual_size - 1, 2)
-    if (points[0] > points[1]):
-            points[0], points[1] = points[1], points[0]
-
-    ## Perform crossover to generate offspring
-    for i in range(points[0], points[1] + 1):
-        offspring[i] = parent1.tour[i]
-    i = points[1] + 1
-    while offspring[i] == None:
-        j = i
-        while parent2.tour[j] in offspring:
-            j = (j + 1) % individual_size
-        offspring[i] = parent2.tour[j]
-        i = (i + 1) % individual_size
-
-    offspring1 = Tour.Tour(city_map, offspring)
-
-    return offspring1
-
-########################
-######            ######
-######    Test    ######
-######            ######
-########################
-"""
-file  = "Cities/TSP_WesternSahara_29.txt"
-c = CityMap.CityMap(file)
-city_map = c.city_map
-Object = Initialization.Population(4, city_map)
-pop = Object.population
-p1 = pop[0][0]
-p2 = pop[1][0]
-print("parents:")
-print(p1.tour, "fitness: ",p1.fitness )
-print(p2.tour, "fitness: ",p2.fitness )
-o1, o2 = COWGC(p1, p2, city_map)
-print("offsprings:")
-print(o1.tour, "fitness: ",o1.fitness)
-print(o2.tour, "fitness: ", o2.fitness)
-print()
-#check unique
-o11 =set(o1.tour)
-o22 = set(o2.tour)
-print(len(o11))
-print(len(o22))
-"""
-"""
-file  = "Cities/TSP_WesternSahara_29.txt"
-c = CityMap.CityMap(file)
-city_map = c.city_map
-Object = Initialization.Population(4, city_map)
-pop = Object.population
-p1 = pop[0]
-p2 = pop[1]
-print("parents:")
-print(p1.tour)
-print(p2.tour)
-off1= order_crossover(p1.tour, p2.tour, city_map)
-print("offsprings:")
-print(off1.tour)
-t = set(off1.tour)
-print(len(t))
-"""
-"""
-file  = "Cities/TSP_WesternSahara_29.txt"
-c = CityMap.CityMap(file)
-city_map = c.city_map
-Object = Initialization.Population(4, city_map)
-pop = Object.population
-p1 = pop[0]
-p2 = pop[1]
-print("parents:")
-print(p1.tour)
-print(p2.tour)
-off1, off2= order_crossover_n(p1, p2, city_map)
-print("offsprings:")
-print(off1.tour)
-t = set(off1.tour)
-print(len(t))
-"""

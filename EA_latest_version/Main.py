@@ -17,7 +17,7 @@ def main():
     tournament_size = 3
     mut_rate = 0.2
     xover_rate = 0.9
-    gen_limit = 30000
+    gen_limit = 500
 
     print("Preparing for the information...")
     c = CityMap.CityMap(uruguay734)
@@ -48,9 +48,7 @@ def main():
             #print("crossover...")
             if random.random() < xover_rate:
                 #off1, off2 = Crossover.COWGC(p1, p2, city_map)
-                #off1 = Crossover.order_crossover(p1, p2, city_map)
-                #off2 = Crossover.order_crossover(p1, p2, city_map)
-                off1, off2 = Crossover.order_crossover_n(p1, p2, city_map)
+                off1, off2 = Crossover.order_crossover(p1, p2, city_map)
             else:
                 off1 = copy.copy(p1)
                 off2 = copy.copy(p2)
@@ -60,10 +58,12 @@ def main():
             #print("Mutation...")
             if random.random() < mut_rate:
                 off1 = Mutation.WGWWGM(p1, city_map)
+                #off1 = Mutation.WGWRGM(p1, city_map)
                 #off1 = Mutation.IRGIBNNM_mutation(p1, city_map)
                 #off1 = Mutation.inversion_mutation(p1, city_map)
             if random.random() < mut_rate:
                 off2 = Mutation.WGWWGM(p2, city_map)
+                #off2 = Mutation.WGWRGM(p2, city_map)
                 #off2 = Mutation.IRGIBNNM_mutation(p2, city_map)
                 #off2 = Mutation.inversion_mutation(p2, city_map)
             #print("Mutation end")

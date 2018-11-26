@@ -2,7 +2,7 @@
 
 def get_cities(cities_file):
     """
-    A function to extract all the cities information from the file
+    A function to extract all the cities coordinates from the file
     :param file: city file
     :return: a dictionary which key is referenced to the city name and the value refer to the x, y coordinates
     """
@@ -16,14 +16,3 @@ def get_cities(cities_file):
             cities[name] = [x, y]
 
     return cities
-
-
-########################
-######            ######
-######    Test    ######
-######            ######
-########################
-"""
-cities = get_cities("Cities/TSP_WesternSahara_29.txt")
-print(cities)
-"""

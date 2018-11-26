@@ -1,5 +1,4 @@
 import Tour
-import CityMap
 
 class Population(object):
     """
@@ -13,8 +12,11 @@ class Population(object):
         An initializer to initialize the population with a given size
 
         self.size: a size of the population
-        self.file: a cities file to be generated
-        self.population: a dictionary to store tour objects and automatically calculate the fitness for each tour
+        self.city_map: a map that contains all the city information
+        self.population: a list to store tour objects
+        self.bestTour: the best tour in a population
+        self.worstTour: the worst tour in a population
+        self.AverageLength: the average length of tours in a population
         """
         self.size = size
         self.city_map = city_map
@@ -29,8 +31,8 @@ class Population(object):
 
     def evalPopulation(self):
         """
-
-        :return:
+        Evaluate the population, to get all the information that need to be research.
+        Also, put the best tour at the first index of the population (to better preserve diversity when running main)
         """
         self.bestTour = self.population[0]
         self.worstTour = self.population[0]
@@ -52,21 +54,3 @@ class Population(object):
             self.population[0] = temp
 
 
-########################
-######            ######
-######    Test    ######
-######            ######
-########################
-"""
-size = 10
-file = "Cities/TSP_WesternSahara_29.txt"
-c = CityMap.CityMap(file)
-city_map = c.city_map
-p = Population(10, city_map)
-for i in p.population:
-    print(i.tour)
-print()
-p.evalPopulation()
-for i in p.population:
-    print(i.tour)
-"""

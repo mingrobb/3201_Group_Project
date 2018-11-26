@@ -1,18 +1,20 @@
 import random
-import math
 
 class Tour(object):
     """
-    Stores an ordered list of all city id and the length of the tour
+    Stores an ordered list of all cities information and the length of the tour
     """
     def __init__(self, city_map, tour=None):
         """
         An initializer to initialize the tour object
-        :param file: A file that contains city information
 
+        self.city_map: a map that contains all the city information
         self.tour: a random shuffle list of all city id
-        self.cities: a dictionary that contains all the city information
+        self.cities: a list that contains all the city id
         self.length: the length of the tour
+        self.max_distance: the maximum distance between two cities in a tour
+        self.worst_idx: the index between teo cities that have the longest distance in a tour
+        self.city_objects: a list that store all the city objects
         """
         self.city_map = city_map
         self.cities = city_map.keys()
@@ -57,30 +59,3 @@ class Tour(object):
         return tour_length
 
 
-########################
-######            ######
-######    Test    ######
-######            ######
-########################
-"""
-file = "Cities/TSP_WesternSahara_29.txt"
-c = CityMap.CityMap(file)
-city_map = c.city_map
-tour = Tour(city_map, None)
-print(tour.length)
-print(tour.tour)
-print(len(tour.tour))
-print(len(tour.city_objects))
-""
-for k,v in tour.city_map.items():
-    print(v.id, v.x, v.y)
-    print(v.distances)
-""
-print()
-print(tour.worst_idx)
-print(tour.max_distance)
-x = tour.city_objects[tour.worst_idx[0]].id
-y = tour.city_objects[tour.worst_idx[1]].id
-print(x, y)
-print(city_map[x].distances[y])
-"""

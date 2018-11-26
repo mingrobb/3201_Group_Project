@@ -1,4 +1,3 @@
-import Extract_cities
 from math import sqrt
 
 class City(object):
@@ -6,17 +5,19 @@ class City(object):
     A city class which is use to store city object
     """
 
-    def __init__(self, id, x, y, file, distances=None):
+    def __init__(self, id, x, y, cities, distances=None):
         """
         Initialize city object, including the coordinates and the distances to other cities
-        :param name: city name
-        :param x: x coordinate
-        :param y: y coordinate
+
+        self.id: city id
+        self.x: x coordinate
+        self.y: y coordinate
+        self.cities: a dictionary that contains citiies coordinates
         """
         self.id = id
         self.x = x
         self.y = y
-        self.cities = Extract_cities.get_cities(file)
+        self.cities = cities
 
         self.distances = {}
         if distances:
@@ -42,17 +43,5 @@ class City(object):
         """
         return sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2)
 
-
-########################
-######            ######
-######    Test    ######
-######            ######
-########################
-"""
-file = "Cities/TSP_WesternSahara_29.txt"
-city = City(1, 20833.3333, 17100.0000, file)
-city.cal_distance()
-print(city.distances)
-"""
 
 

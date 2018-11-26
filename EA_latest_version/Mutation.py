@@ -1,13 +1,12 @@
 import Tour
 import random
-import CityMap
 
 def inversion_mutation(individual, city_map):
     """
-
-    :param indeividual:
-    :param citymap:
-    :return:
+    Inversion mutation
+    :param indeividual: a tour object
+    :param citymap: a map that contains all the city information
+    :return: a mutated offspring
     """
     tour = individual.tour
     point1 = random.randint(0, len(tour)-1)
@@ -26,10 +25,10 @@ def inversion_mutation(individual, city_map):
 
 def RGIBNNM_mutation(individual, city_map):
     """
-
-    :param individual:
-    :param city_map:
-    :return:
+    RGBIBNNM mutation
+    :param individual: a tour object
+    :param city_map: a map that contains all the city information
+    :return: a mutated offspring
     """
     tour = individual.tour
     rand_idx = random.randint(0, len(tour)-1)
@@ -64,10 +63,10 @@ def RGIBNNM_mutation(individual, city_map):
 
 def IRGIBNNM_mutation(individual, city_map):
     """
-
-    :param indeividual:
-    :param city_map:
-    :return:
+    Combination of inversion mutation and RGIBNNM mutation
+    :param indeividual: a tour object
+    :param city_map: a map that contains all the city information
+    :return: a mutated offspring
     """
     #apply inversion mutation first
     invert = inversion_mutation(individual, city_map)
@@ -83,7 +82,7 @@ def WGWWGM(individual, city_map):
     """
     Worst gene with worst gene mutation
     :param individual: a tour object
-    :return: mutated offspring
+    :return: a mutated offspring
     """
     city_objects = individual.city_objects
     tour = individual.tour
@@ -118,10 +117,11 @@ def WGWWGM(individual, city_map):
 
 def WGWRGM(individual, city_map):
     """
-    Worst gene with random gene mutation
+    Worst gene with random gene mutation.
+    Swap the worst index and a random index
     :param individual: a tour object
-    :param city_map: city map
-    :return: mutated offspring
+    :param city_map: a map that contains all the city information
+    :return: a mutated offspring
     """
     worst_idx = individual.worst_idx[1]
     tour = individual.tour
@@ -136,50 +136,6 @@ def WGWRGM(individual, city_map):
 
     return offspring
 
-def random_mutate(indiidual, city_map):
-    """
-
-    :param indiidual:
-    :param city_map:
-    :return:
-    """
 
 
-########################
-######            ######
-######    Test    ######
-######            ######
-########################
-"""
-file  = "Cities/TSP_WesternSahara_29.txt"
-c = CityMap.CityMap(file)
-city_map = c.city_map
-tour = Tour.Tour(city_map)
-print("        ", tour.tour)
-mutant1 = WGWRGM(tour,city_map)
-print("WGWRGM: ",mutant1.tour)
-mutant2 = WGWWGM(tour,city_map)
-print("WGWWGM: ",mutant2.tour)
-"""
-"""
-Inversion mutation
-file  = "Cities/TSP_WesternSahara_29.txt"
-c = CityMap.CityMap(file)
-city_map = c.city_map
-tour = Tour.Tour(city_map)
-print(tour.tour)
-mut = inversion_mutation(tour, city_map)
-print(mut.tour)
-s = set(mut.tour)
-print(len(s))
-"""
-"""
-#RGIBNNM
-file  = "Cities/TSP_WesternSahara_29.txt"
-c = CityMap.CityMap(file)
-city_map = c.city_map
-tour = Tour.Tour(city_map)
-print(tour.tour)
-mut = IRGIBNNM_mutation(tour, city_map)
-print(mut.tour)
-"""
+
