@@ -1,0 +1,5 @@
+.ignore
+.idea
+app.egg-info
+*.pyc
+.DS_Store
