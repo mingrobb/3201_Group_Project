@@ -12,15 +12,15 @@ def main():
     uruguay734 = "Cities/TSP_Uruguay_734.txt"
     canada4663 = "Cities/TSP_Canada_4663.txt"
 
-    popsize = 500
-    mating_pool_size = 100
+    popsize = 2000
+    mating_pool_size = 1200
     tournament_size = 3
     mut_rate = 0.2
     xover_rate = 0.9
     gen_limit = 500
 
     print("Preparing for the information...")
-    c = CityMap.CityMap(uruguay734)
+    c = CityMap.CityMap(western29)
     city_map = c.city_map
     print("preparation end.")
 
