@@ -12,12 +12,12 @@ def main():
     uruguay734 = "Cities/TSP_Uruguay_734.txt"
     canada4663 = "Cities/TSP_Canada_4663.txt"
 
-    popsize = 600
-    mating_pool_size = 500
+    popsize = 500
+    mating_pool_size = 100
     tournament_size = 3
     mut_rate = 0.2
     xover_rate = 0.9
-    gen_limit = 5000
+    gen_limit = 30000
 
     print("Preparing for the information...")
     c = CityMap.CityMap(uruguay734)
@@ -35,8 +35,15 @@ def main():
 
         #parent selection
         #print("parent selection...")
-        parents = Selection.tournament_selection(init.population[1:], mating_pool_size, tournament_size)
+        """
+        if init.bestTour.length - init.worstTour.length > 5000:
+            parents = Selection.tournament_selection(init.population[1:], mating_pool_size, tournament_size)
+        else:
+            parents = Selection.random_selection(init.population[1:], mating_pool_size)
         #print("parent selection end.")
+        """
+        parents = Selection.tournament_selection(init.population[1:], mating_pool_size, tournament_size)
+        #parents = Selection.random_selection(init.population[1:], mating_pool_size)
 
         offsprings = []
         i = 0
@@ -77,6 +84,7 @@ def main():
         # survial selection ############################################################################################
         #print("survival selection")
         init.population[1:] = Selection.mu_plus_lambda(init.population[1:], offsprings)
+        #init.population[1:] = Selection.random_survival(init.population[1:], offsprings)
         #print("survival selection end")
 
         init.evalPopulation()

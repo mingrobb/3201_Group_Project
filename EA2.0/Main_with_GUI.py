@@ -15,7 +15,7 @@ def main():
     canada4663 = "Cities/TSP_Canada_4663.txt"
 
     popsize = 2000
-    mating_pool_size = 300
+    mating_pool_size = 1200
     tournament_size = 3
     mut_rate = 0.2
     xover_rate = 0.9

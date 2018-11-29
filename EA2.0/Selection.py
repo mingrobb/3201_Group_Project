@@ -40,3 +40,27 @@ def mu_plus_lambda(cur_pop, offsprings):
 
     return pop
 
+
+def random_selection(population, mating_pool_size):
+    """
+
+    :param population:
+    :param mating_pool_size:
+    :return:
+    """
+    selected_to_mate = random.sample(population, mating_pool_size)
+    return selected_to_mate
+
+def random_survival(cur_pop, offsprings):
+    """
+
+    :param cur_pop:
+    :param offsprings:
+    :return:
+    """
+    temp_pop = cur_pop + offsprings
+
+    pop = random.sample(temp_pop, len(cur_pop))
+
+    return pop
+

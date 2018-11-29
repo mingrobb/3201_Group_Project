@@ -1,6 +1,7 @@
 
 import Tour
-from numpy import random
+import random
+#from numpy import random
 import collections
 
 def COWGC(parent1, parent2, city_map):
@@ -108,7 +109,10 @@ def order_crossover(parent1, parent2, city_map):
     off2 = collections.deque()
     length = len(p1)
 
-    points = random.randint(1, length-1, 2)
+    #points = random.randint(1, length-1, 2)
+    point1 = random.randint(0, 28)
+    point2 = random.randint(0, 28)
+    points = [point1, point2]
     if points[0] > points[1]:
         points[0], points[1] = points[1], points[0]
 
