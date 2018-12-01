@@ -22,6 +22,25 @@ def tournament_selection(population, mating_pool_size, tournament_size):
         selected_to_mate.append(best)
     return selected_to_mate
 
+def MPS(population, mating_pool_size):
+    fitness = []
+    selected_to_mate = []
+    for i in range(len(population)):
+        fitness.append(population[i].length)
+    fit_sum = sum(fitness)
+    cumul_prop = []
+    cumul_prop.append(fitness[0]/fit_sum)
+    for i in range (1, len(fitness)):
+        cumul_prop.append(cumul_prop[i-1] + fitness[i]/fit_sum)
+    rv = random.uniform(0,1/mating_pool_size)
+    i=0
+    while len(selected_to_mate) < mating_pool_size:
+        while rv <= cumul_prop[i]:
+            selected_to_mate.append(population[i])
+            rv = rv +1/mating_pool_size
+        i = i+1
+    return selected_to_mate
+
 
 def mu_plus_lambda(cur_pop, offsprings):
     """
