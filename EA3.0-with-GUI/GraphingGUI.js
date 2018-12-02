@@ -17,7 +17,7 @@ var content = new Vue
             instance: null,
             plain_map: null,
 
-            trial_all: 10,
+            trial_all: 1,
             generation_all: 100,
             individual_all: 2,
             generation_size: 1200,
@@ -69,7 +69,13 @@ var content = new Vue
                         }
                     ];
 
-                Plotly.newPlot(   $(".figure.timecost.statistics")[0], experiment_plotly1, {}, {responsive: true}   );
+                var layout1 =
+                    {
+                        xaxis: {   title: 'trial'   },
+                        yaxis: {   title: 'time cost'   },
+                    };
+
+                Plotly.newPlot(   $(".figure.timecost.statistics")[0], experiment_plotly1, layout1, {responsive: true}   );
 
                 // trials的distance统计 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
                 let best_ys = [];
@@ -131,7 +137,7 @@ var content = new Vue
                 let worst_ys = [];
                 let avg_ys = [];
 
-                for(let i=1; i<=this.generation_all; i++)
+                for(let i=1; i<=this.generation_n; i++)
                 {
                     best_ys.push(   this.instance["evolutions"][this.trial_n-1][i]["best-individual-distance"]   );
                     worst_ys.push(   this.instance["evolutions"][this.trial_n-1][i]["worst-individual-distance"]   );
@@ -262,14 +268,25 @@ var content = new Vue
                 {
                     this.plain_map = plain_map_WesternSahara;
                     this.instance = advanced_WesternSahara;
+                    trial_all = this.instance["description"]["evolution_all"];
+                    generation_all = this.instance["description"]["generation_all"];
+                    generation_size =  this.instance["description"]["generation_size"];
                 }
                 else if(this.instance_select == "Uruguay")
                 {
                     this.plain_map = plain_map_Uruguay;
+                    this.instance = advanced_Uruguay;
+                    trial_all = this.instance["description"]["evolution_all"];
+                    generation_all = this.instance["description"]["generation_all"];
+                    generation_size =  this.instance["description"]["generation_size"];
                 }
                 else if(this.instance_select == "Canada")
                 {
                     this.plain_map = plain_map_Canada;
+                    this.instance = advanced_Canada;
+                    trial_all = this.instance["description"]["evolution_all"];
+                    generation_all = this.instance["description"]["generation_all"];
+                    generation_size =  this.instance["description"]["generation_size"];
                 }
 
                 var plain_map_plotly =

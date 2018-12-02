@@ -14,70 +14,65 @@ def main():
     uruguay734 = "Cities/TSP_Uruguay_734.txt"
     canada4663 = "Cities/TSP_Canada_4663.txt"
 
-    popsize = 2000
-    mating_pool_size = 300
+    popsize = 1000
+    mating_pool_size = 800
     tournament_size = 3
     mut_rate = 0.2
     xover_rate = 0.9
     gen_limit = 100
 
-    advanced_Canada = {
-        "description": {
-            "instance_name": "none",
-            "algorithm": "none",
-            "city_all": 4663,
-            "generation_all": gen_limit
-        },
-        "evolutions": [
-            # nothing yet
-        ]
-    }
 
-    advanced_Uruguay = {
-        "description": {
-            "instance_name": "none",
-            "algorithm": "none",
-            "city_all": 734,
-            "generation_all": gen_limit
-        },
-        "evolutions": [
-            # nothing yet
-        ]
-    }
+    # choose the instance you are using ################################################################################
+    instance_name = "WesternSahara"
+    evolution_all = 10
 
-    advanced_WesternSahara = {
+
+    source = None
+    city_all = 0
+
+    if instance_name == "WesternSahara" :
+        city_all = 29
+        source = western29
+    if instance_name == "Uruguay" :
+        city_all = 734
+        source = uruguay734
+    if instance_name == "Canada" :
+        city_all = 4663
+        source = canada4663
+
+    experiment = {
         "description": {
-            "instance_name": "none",
-            "algorithm": "none",
-            "city_all": 29,
-            "evolution_all": 10,
+            "instance_name": instance_name,
+            "algorithm": "advanced",
+            "city_all": city_all,
+            "evolution_all": evolution_all,
             "generation_all": gen_limit,
-            "generation_size": mating_pool_size
+            "generation_size": popsize
         },
         "evolutions": [
             # nothing yet
         ]
     }
 
-    print(   json.dumps(advanced_WesternSahara)   )
+    print(   json.dumps(experiment)   )
 
 
 
 
-    for evo in range(10):    # Experiment
+    for evo in range(evolution_all):    # Experiment
 
         # construct a trial #
         trial = [
-            [{"time_cost": 0}]
+            {"time_cost": 0}
         ]
 
         print("trial", evo+1)
 
+        start_time = time.time()
 
 
-        # t = time.time()
         print("Preparing for the information...")
-        c = CityMap.CityMap(western29)
+        c = CityMap.CityMap(source)
         city_map = c.city_map
         print("preparation end.")
 
@@ -105,21 +100,22 @@ def main():
                 #print("crossover...")
                 if random.random() < xover_rate:
                     #off1, off2 = Crossover.COWGC(p1, p2, city_map)
-                    off1 = Crossover.order_crossover(p1, p2, city_map)
-                    off2 = Crossover.order_crossover(p1, p2, city_map)
+                    off1, off2 = Crossover.order_crossover(p1, p2, city_map)
                 else:
                     off1 = copy.copy(p1)
                     off2 = copy.copy(p2)
                 #print("crossover end")
 
-                # mutation -------------------------------------------------------------------------------------------------
+                # mutation ------------------------------------------------------------------------------------------------
                 #print("Mutation...")
                 if random.random() < mut_rate:
                     off1 = Mutation.WGWWGM(p1, city_map)
+                    #off1 = Mutation.WGWRGM(p1, city_map)
                     #off1 = Mutation.IRGIBNNM_mutation(p1, city_map)
                     #off1 = Mutation.inversion_mutation(p1, city_map)
                 if random.random() < mut_rate:
                     off2 = Mutation.WGWWGM(p2, city_map)
+                    #off2 = Mutation.WGWRGM(p2, city_map)
                     #off2 = Mutation.IRGIBNNM_mutation(p2, city_map)
                     #off2 = Mutation.inversion_mutation(p2, city_map)
                 #print("Mutation end")
@@ -154,21 +150,31 @@ def main():
 
             gen += 1
 
-        advanced_WesternSahara["evolutions"].append(trial)
+            trial[0]["time_cost"] = time.time() - start_time
 
-        print("time cost:", time.time())
+        experiment["evolutions"].append(trial)
 
 
 
     # here processing generating json file #############################################################################
 
-    output_file = open("advanced_WesternSahara.js", "w")
+    output_file = None
+    variable_declaration = "none"
 
-    output_file.write("let advanced_WesternSahara = ")
-    output_file.write(json.dumps(advanced_WesternSahara))
+    if instance_name == "WesternSahara" :
+        output_file = open("advanced_WesternSahara.js", "w")
+        variable_declaration = "let advanced_WesternSahara = "
+    if instance_name == "Uruguay" :
+        output_file = open("advanced_Uruguay.js", "w")
+        variable_declaration = "let advanced_Uruguay = "
+    if instance_name == "Canada" :
+        output_file = open("advanced_Canada.js", "w")
+        variable_declaration = "let advanced_Canada = "
+
+    output_file.write(variable_declaration)
+    output_file.write(json.dumps(experiment))
 
     output_file.close()
-
 
 
 

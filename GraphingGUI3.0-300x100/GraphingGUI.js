@@ -128,7 +128,7 @@ var content = new Vue
                 let worst_ys = [];
                 let avg_ys = [];
 
-                for(let i=1; i<=this.generation_n; i++)
+                for(let i=1; i<=this.generation_all; i++)
                 {
                     best_ys.push(   this.instance["evolutions"][this.trial_n-1][i]["best-individual-distance"]   );
                     worst_ys.push(   this.instance["evolutions"][this.trial_n-1][i]["worst-individual-distance"]   );
