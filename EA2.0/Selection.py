@@ -1,4 +1,6 @@
 import random
+import Initialization
+import CityMap
 
 def tournament_selection(population, mating_pool_size, tournament_size):
     """
@@ -83,3 +85,22 @@ def random_survival(cur_pop, offsprings):
 
     return pop
 
+"""
+western29 = "Cities/TSP_WesternSahara_29.txt"
+citymap = CityMap.CityMap(western29).city_map
+pop = Initialization.Population(3, citymap)
+print(pop.population[0].length)
+print(pop.population[1].length)
+print(pop.population[2].length)
+
+print()
+pop2 = Initialization.Population(1, citymap)
+off = pop2.population[0]
+print(off.length)
+
+print()
+p = random_survival(pop.population, [off])
+print(p[0].length)
+print(p[1].length)
+print(p[2].length)
+"""

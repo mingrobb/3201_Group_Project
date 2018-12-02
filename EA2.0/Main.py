@@ -12,15 +12,15 @@ def main():
     uruguay734 = "Cities/TSP_Uruguay_734.txt"
     canada4663 = "Cities/TSP_Canada_4663.txt"
 
-    popsize = 10000
-    mating_pool_size = 600
+    popsize = 2000
+    mating_pool_size = 1200
     tournament_size = 3
-    mut_rate = 0.2
+    mut_rate = 0.1
     xover_rate = 0.9
-    gen_limit = 30000
+    gen_limit = 40000
 
     print("Preparing for the information...")
-    c = CityMap.CityMap(uruguay734)
+    c = CityMap.CityMap(uruguay734 )
     city_map = c.city_map
     print("preparation end.")
 
@@ -36,7 +36,6 @@ def main():
         #parent selection
         #print("parent selection...")
         parents = Selection.tournament_selection(init.population[1:], mating_pool_size, tournament_size)
-        #parents = Selection.random_selection(init.population[1:], mating_pool_size)
         #parents = Selection.MPS(init.population[1:], mating_pool_size)
 
         offsprings = []
@@ -62,11 +61,15 @@ def main():
                 #off1 = Mutation.WGWRGM(p1, city_map)
                 #off1 = Mutation.IRGIBNNM_mutation(p1, city_map)
                 #off1 = Mutation.inversion_mutation(p1, city_map)
+                #off1 = Mutation.swap_mutation(p1, city_map)
+
             if random.random() < mut_rate:
                 off2 = Mutation.WGWWGM(p2, city_map)
                 #off2 = Mutation.WGWRGM(p2, city_map)
                 #off2 = Mutation.IRGIBNNM_mutation(p2, city_map)
                 #off2 = Mutation.inversion_mutation(p2, city_map)
+                #off2 = Mutation.swap_mutation(p2, city_map)
+
             #print("Mutation end")
 
             offsprings.append(off1)
@@ -75,13 +78,21 @@ def main():
 
             i += 2
 
+        diversity = init.totalLength/(popsize*734)
+
         # survial selection ############################################################################################
         #print("survival selection")
-        init.population = Selection.mu_plus_lambda(init.population, offsprings)
+        if diversity > 1200:
+            init.population = Selection.mu_plus_lambda(init.population, offsprings)
+        if diversity < 1200:
+            if random.random() > 0.7:
+                init.population = Selection.mu_plus_lambda(init.population, offsprings)
+            else:
+                init.population = Selection.random_survival(init.population, offsprings)
 
         init.evalPopulation()
 
-        print("generation:", gen, " Average length:", init.AverageLength, " Longest length: ", init.worstTour.length, " shortest length:", init.bestTour.length)
+        print("generation:", gen, " Average length:", init.AverageLength, " Longest length: ", init.worstTour.length, " shortest length:", init.bestTour.length, "diversity: ",diversity)
 
         gen += 1
 

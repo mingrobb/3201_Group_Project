@@ -23,6 +23,26 @@ def inversion_mutation(individual, city_map):
 
     return offspring
 
+def swap_mutation(individual, city_map):
+    """
+
+    :param individual:
+    :param city_map:
+    :return:
+    """
+    tour = individual.tour
+    point1 = random.randint(0, 28)
+    point2 = random.randint(0, 28)
+    points = [point1, point2]
+    if points[0] > points[1]:
+        points[0], points[1] = points[1], points[0]
+
+    tour[point1], tour[point2] = tour[point2], tour[point1]
+
+    offspring = Tour.Tour(city_map, tour)
+
+    return offspring
+
 def RGIBNNM_mutation(individual, city_map):
     """
     RGBIBNNM mutation
