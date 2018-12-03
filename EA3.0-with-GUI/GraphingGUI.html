@@ -100,7 +100,7 @@
         <div class="dashboard panel" v-show="show_dashboard">
 
             <h4>Select trial</h4>
-            <el-slider v-model="trial_n" :min="1" :max="10" show-input
+            <el-slider v-model="trial_n" :min="1" :max="trial_all" show-input
             @change="drawEvolution();drawGeneration();drawIndividual()"></el-slider>
 
             <div class="divbar"></div>
@@ -152,7 +152,6 @@
     </div>
 </body>
 
-<script src="draw.js" charset="utf-8"></script>
 <script src="GraphingGUI.js" charset="utf-8"></script>
 
 </html>

@@ -137,7 +137,7 @@ var content = new Vue
                 let worst_ys = [];
                 let avg_ys = [];
 
-                for(let i=1; i<=this.generation_n; i++)
+                for(let i=1; i<=this.generation_all; i++)
                 {
                     best_ys.push(   this.instance["evolutions"][this.trial_n-1][i]["best-individual-distance"]   );
                     worst_ys.push(   this.instance["evolutions"][this.trial_n-1][i]["worst-individual-distance"]   );
@@ -268,25 +268,25 @@ var content = new Vue
                 {
                     this.plain_map = plain_map_WesternSahara;
                     this.instance = advanced_WesternSahara;
-                    trial_all = this.instance["description"]["evolution_all"];
-                    generation_all = this.instance["description"]["generation_all"];
-                    generation_size =  this.instance["description"]["generation_size"];
+                    this.trial_all = this.instance["description"]["evolution_all"];
+                    this.generation_all = this.instance["description"]["generation_all"];
+                    this.generation_size =  this.instance["description"]["generation_size"];
                 }
                 else if(this.instance_select == "Uruguay")
                 {
                     this.plain_map = plain_map_Uruguay;
                     this.instance = advanced_Uruguay;
-                    trial_all = this.instance["description"]["evolution_all"];
-                    generation_all = this.instance["description"]["generation_all"];
-                    generation_size =  this.instance["description"]["generation_size"];
+                    this.trial_all = this.instance["description"]["evolution_all"];
+                    this.generation_all = this.instance["description"]["generation_all"];
+                    this.generation_size =  this.instance["description"]["generation_size"];
                 }
                 else if(this.instance_select == "Canada")
                 {
                     this.plain_map = plain_map_Canada;
                     this.instance = advanced_Canada;
-                    trial_all = this.instance["description"]["evolution_all"];
-                    generation_all = this.instance["description"]["generation_all"];
-                    generation_size =  this.instance["description"]["generation_size"];
+                    this.trial_all = this.instance["description"]["evolution_all"];
+                    this.generation_all = this.instance["description"]["generation_all"];
+                    this.generation_size =  this.instance["description"]["generation_size"];
                 }
 
                 var plain_map_plotly =

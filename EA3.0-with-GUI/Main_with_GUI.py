@@ -24,7 +24,7 @@ def main():
 
     # choose the instance you are using ################################################################################
     instance_name = "WesternSahara"
-    evolution_all = 10
+    evolution_all = 20
 
 
     source = None
