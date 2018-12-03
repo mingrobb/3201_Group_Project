@@ -14,17 +14,17 @@ def main():
     uruguay734 = "Cities/TSP_Uruguay_734.txt"
     canada4663 = "Cities/TSP_Canada_4663.txt"
 
-    popsize = 1000
-    mating_pool_size = 800
-    tournament_size = 3
+    popsize = 20000
+    mating_pool_size = 16000
+    tournament_size = 10
     mut_rate = 0.2
     xover_rate = 0.9
-    gen_limit = 100
+    gen_limit = 1000
 
 
     # choose the instance you are using ################################################################################
-    instance_name = "WesternSahara"
-    evolution_all = 20
+    instance_name = "Uruguay"
+    evolution_all = 1
 
 
     source = None

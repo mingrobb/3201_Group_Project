@@ -48,7 +48,6 @@ var content = new Vue
 
                 for(let i=0; i<this.instance["description"]["evolution_all"]; i++)
                 {   xs.push(i+1);   }
-                console.log(xs);
 
                 // trials的time-costs统计 - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
                 let timecost_ys = [];
@@ -84,12 +83,10 @@ var content = new Vue
 
                 for(let i=0; i<this.instance["evolutions"].length; i++)
                 {
-                    best_ys.push(   this.instance["evolutions"][i][100]["best-individual-distance"]   );
-                    worst_ys.push(   this.instance["evolutions"][i][100]["worst-individual-distance"]   );
-                    avg_ys.push(   this.instance["evolutions"][i][100]["average-distance"]   );
+                    best_ys.push(   this.instance["evolutions"][i][this.generation_all]["best-individual-distance"]   );
+                    worst_ys.push(   this.instance["evolutions"][i][this.generation_all]["worst-individual-distance"]   );
+                    avg_ys.push(   this.instance["evolutions"][i][this.generation_all]["average-distance"]   );
                 }
-
-                console.log(best_ys);
 
                 var experiment_plotly2 =
                     [
