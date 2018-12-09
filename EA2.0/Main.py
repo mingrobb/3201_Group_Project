@@ -12,8 +12,8 @@ def main():
     uruguay734 = "Cities/TSP_Uruguay_734.txt"
     canada4663 = "Cities/TSP_Canada_4663.txt"
 
-    popsize = 2000
-    mating_pool_size = 1200
+    popsize = 40000
+    mating_pool_size = 25000
     tournament_size = 3
     mut_rate = 0.1
     xover_rate = 0.9
@@ -82,13 +82,16 @@ def main():
 
         # survial selection ############################################################################################
         #print("survival selection")
-        if diversity > 1200:
+        """
+        if diversity > 600:
             init.population = Selection.mu_plus_lambda(init.population, offsprings)
-        if diversity < 1200:
+        if diversity < 600:
             if random.random() > 0.7:
                 init.population = Selection.mu_plus_lambda(init.population, offsprings)
             else:
                 init.population = Selection.random_survival(init.population, offsprings)
+        """
+        init.population = Selection.mu_plus_lambda(init.population, offsprings)
 
         init.evalPopulation()
 
