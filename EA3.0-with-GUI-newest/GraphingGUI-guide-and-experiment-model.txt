@@ -1,0 +1,19 @@
+4-layer experiment model
+    1. experiment
+    2. trials(evolutions)
+    3. generations
+    4. individuals
+
+    An experiment consists of trial_n trials.
+    A trial contains generation_n generations.
+    A generation contains population_size individuals.
+    An individual stores the essential information of an individual.
+
+    As the trials are very similar to each other, we mainly study the best one trial in an experiment.
+
+GraphingGUI guide
+    1. Use the Main_with_GUI.py to generate a specified structured data file for graphing use.
+        In the Main_with_GUI.py, after setting up the parameters of the algorithm, the user only needs to set two parameters for graphing.
+        They're instance_name and evolution_all, which refer to the source data you are using and how many trials you want to do.
+    2. When finished running algorithm, open GraphingGUI.html to view the graphing stuff.
+        The manipulation of GUI is quite obvious.
