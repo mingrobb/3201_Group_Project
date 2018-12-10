@@ -1,1 +1,0 @@
-let advanced_Canada = {};
